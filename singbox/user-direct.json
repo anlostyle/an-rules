@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "rules": [
+    {
+      "domain": [
+        "dsadata.intel.com",
+        "doh.pub"
+      ]
+    },
+    {
+      "domain_suffix": [
+        "speedtest.im",
+        "ui.com",
+        "ubnt.com",
+        "greencloudvps.com",
+        "andp.cc",
+        "sonos.com",
+        "synology.com",
+        "termius.com",
+        "steamcontent.com",
+        "steamcontent.tnkjmec.com",
+        "steamserver.net",
+        "steamcdn-a.akamaihd.net",
+        "steampipe.akamaized.net",
+        "steampipe-kr.akamaized.net",
+        "steampipe-partner.akamaized.net",
+        "content.steamchina.com",
+        "st.dl.eccdnx.com",
+        "ssl.hwcdn.net"
+      ]
+    },
+    {
+      "domain_keyword": [
+        "oracle.com"
+      ]
+    },
+    {
+      "ip_cidr": [
+        "110.238.105.108/32"
+      ]
+    }
+  ]
+}

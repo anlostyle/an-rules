@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "rules": [
+    {
+      "domain_suffix": [
+        "binance.com",
+        "jdbstatic.com",
+        "cloudflare.com",
+        "spotify.com",
+        "github.com",
+        "githubusercontent.com",
+        "githubassets.com",
+        "tmdb.org",
+        "pterclub.net",
+        "audiences.me",
+        "ourbits.club"
+      ]
+    }
+  ]
+}

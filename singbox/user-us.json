@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "rules": [
+    {
+      "domain": [
+        "cloudflare-dns.com",
+        "u2.dmhy.org"
+      ]
+    },
+    {
+      "domain_suffix": [
+        "dmit.io",
+        "t-mobile.com",
+        "whatsapp.net",
+        "paypal.com",
+        "hdbits.org"
+      ]
+    },
+    {
+      "ip_cidr": [
+        "1.0.0.1/32",
+        "1.1.1.1/32",
+        "8.8.8.8/32"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": 3,
+  "rules": [
+    {
+      "domain": [
+        "wall.andp.cc"
+      ]
+    },
+    {
+      "domain_suffix": [
+        "javdb.com",
+        "1password.com",
+        "themoviedb.org"
+      ]
+    }
+  ]
+}
