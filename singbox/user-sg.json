@@ -11,6 +11,12 @@
         "javdb.com",
         "themoviedb.org"
       ]
+    },
+    {
+      "domain_keyword": [
+        "redotpay",
+        "redpocket"
+      ]
     }
   ]
 }
