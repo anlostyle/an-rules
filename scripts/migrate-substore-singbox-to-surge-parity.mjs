@@ -219,15 +219,17 @@ if (config.experimental?.clash_api?.external_ui_download_detour) {
   config.experimental.clash_api.external_ui_download_detour = "🎯 全球直连";
 }
 
+const majorRegionNodes = "^(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)";
+const automaticMajorRegionNodes =
+  "^(?!(?:🇯🇵 JP-GREEN｜Vless|🇺🇸 US-BWH｜Vless)$)(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)";
+
 const injectionRules = [
-  [
-    "^(?:♻️ 自动选择|🐸 手动选择)$",
-    "^(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)",
-  ],
+  ["^♻️ 自动选择$", automaticMajorRegionNodes],
+  ["^🐸 手动选择$", majorRegionNodes],
   ["^🇭🇰 香港自动$", "^🇭🇰"],
-  ["^🇯🇵 日本自动$", "^🇯🇵"],
+  ["^🇯🇵 日本自动$", "^(?!🇯🇵 JP-GREEN｜Vless$)🇯🇵"],
   ["^🇸🇬 狮城自动$", "^🇸🇬"],
-  ["^🇺🇲 美国自动$", "^🇺🇸"],
+  ["^🇺🇲 美国自动$", "^(?!🇺🇸 US-BWH｜Vless$)🇺🇸"],
   ["^其他地区$", "^(?:🇹🇼|🇰🇷|🇩🇪|🇬🇧)"],
 ];
 

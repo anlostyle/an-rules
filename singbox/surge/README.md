@@ -21,6 +21,8 @@ policy groups, while Hong Kong, Japan, Singapore, the United States, and the
 global automatic group use sing-box URLTest directly over matching raw nodes.
 Taiwan, South Korea, Germany, and the United Kingdom are collected in one manual
 `其他地区` selector. Subscription-status entries are excluded from all groups.
+`JP-GREEN｜Vless` and `US-BWH｜Vless` remain available in `🐸 手动选择` but are
+excluded from the global and country automatic URLTest groups.
 This keeps the Clash API at 20 visible groups (including `GLOBAL`) instead of
 exposing every provider landing group.
 
