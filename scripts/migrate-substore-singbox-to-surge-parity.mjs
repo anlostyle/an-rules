@@ -12,6 +12,8 @@ const rawBase =
   "https://raw.githubusercontent.com/anlostyle/an-rules/main/singbox/surge";
 const metaBase =
   "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing";
+const metadataFilterUrl =
+  "https://raw.githubusercontent.com/anlostyle/an-rules/main/substore/filter-singbox-metadata.js";
 
 const countryGroups = [
   "🇭🇰 香港自动",
@@ -20,18 +22,23 @@ const countryGroups = [
   "🇺🇲 美国自动",
 ];
 
-const commonChoices = [
-  "🚀 默认代理",
+const orderedInfrastructureChoices = [
   "♻️ 自动选择",
-  ...countryGroups,
   "🐸 手动选择",
+  ...countryGroups,
+  "其他地区",
+  "🎯 全球直连",
 ];
 
-const proxyChoices = [...commonChoices, "🎯 全球直连"];
-const directFirstChoices = ["🎯 全球直连", ...commonChoices];
+const serviceChoices = ["🚀 默认代理", ...orderedInfrastructureChoices];
 
-function selector(tag, outbounds) {
-  return { tag, type: "selector", outbounds };
+function selector(tag, outbounds, defaultOutbound) {
+  return {
+    tag,
+    type: "selector",
+    outbounds,
+    ...(defaultOutbound ? { default: defaultOutbound } : {}),
+  };
 }
 
 function urltest(tag) {
@@ -47,73 +54,35 @@ function urltest(tag) {
 }
 
 const serviceGroups = [
-  selector("🚀 默认代理", [
-    "♻️ 自动选择",
-    ...countryGroups,
-    "🐸 手动选择",
-    "🎯 全球直连",
-  ]),
-  selector("🧠 AI", [
-    "🇸🇬 狮城自动",
-    "🇯🇵 日本自动",
-    "🇺🇲 美国自动",
+  selector("🚀 默认代理", orderedInfrastructureChoices, "♻️ 自动选择"),
+  selector("🧠 AI", serviceChoices, "🇸🇬 狮城自动"),
+  selector("🌍 国外媒体", serviceChoices, "🚀 默认代理"),
+  selector("📲 社交媒体", serviceChoices, "🇭🇰 香港自动"),
+  selector("🎥 流媒体", serviceChoices, "🇭🇰 香港自动"),
+  selector("🎵 TikTok", serviceChoices, "🇯🇵 日本自动"),
+  selector("🎞 Emby", serviceChoices, "🇭🇰 香港自动"),
+  selector("🍀 Google", serviceChoices, "🚀 默认代理"),
+  selector("🪟 Microsoft", serviceChoices, "🎯 全球直连"),
+  selector("🐬 OneDrive", serviceChoices, "🎯 全球直连"),
+  selector("🍏 Apple", serviceChoices, "🎯 全球直连"),
+  selector(
+    "🐠 漏网之鱼",
+    ["🚀 默认代理", "🎯 全球直连"],
     "🚀 默认代理",
-    "🐸 手动选择",
-  ]),
-  selector("🌍 国外媒体", proxyChoices),
-  selector("📲 社交媒体", [
-    "🇭🇰 香港自动",
-    "🇸🇬 狮城自动",
-    "🇯🇵 日本自动",
-    "🇺🇲 美国自动",
-    "🚀 默认代理",
-    "🐸 手动选择",
-  ]),
-  selector("🎥 流媒体", [
-    "🇭🇰 香港自动",
-    "🇸🇬 狮城自动",
-    "🇯🇵 日本自动",
-    "🇺🇲 美国自动",
-    "🚀 默认代理",
-    "🐸 手动选择",
-    "🎯 全球直连",
-  ]),
-  selector("🎵 TikTok", [
-    "🇯🇵 日本自动",
-    "🇸🇬 狮城自动",
-    "🇺🇲 美国自动",
-    "🚀 默认代理",
-    "🐸 手动选择",
-    "🎯 全球直连",
-  ]),
-  selector("🎞 Emby", [
-    "🇭🇰 香港自动",
-    "🇸🇬 狮城自动",
-    "🇯🇵 日本自动",
-    "🚀 默认代理",
-    "🐸 手动选择",
-    "🎯 全球直连",
-  ]),
-  selector("🍀 Google", proxyChoices),
-  selector("🪟 Microsoft", directFirstChoices),
-  selector("🐬 OneDrive", directFirstChoices),
-  selector("🍏 Apple", directFirstChoices),
-  selector("🐠 漏网之鱼", ["🚀 默认代理", "🎯 全球直连"]),
+  ),
 ];
 
 const infrastructureOutbounds = [
-  ...countryGroups.map((tag) => urltest(tag)),
-  selector("🐸 手动选择", []),
   urltest("♻️ 自动选择"),
+  selector("🐸 手动选择", []),
+  ...countryGroups.map((tag) => urltest(tag)),
+  selector("其他地区", []),
   { tag: "🎯 全球直连", type: "direct" },
 ];
 
 const globalChoices = [
   ...serviceGroups.map((group) => group.tag),
-  ...countryGroups,
-  "🐸 手动选择",
-  "♻️ 自动选择",
-  "🎯 全球直连",
+  ...orderedInfrastructureChoices,
 ];
 
 config.outbounds = [
@@ -251,11 +220,18 @@ if (config.experimental?.clash_api?.external_ui_download_detour) {
 }
 
 const injectionRules = [
-  ["^(?:🐸 手动选择|♻️ 自动选择)$", undefined],
+  [
+    "^(?:♻️ 自动选择|🐸 手动选择)$",
+    "(?:^🇭🇰|香港|(?:^|[-_/|\\s])HK(?:[-_/|\\s]|$)|^🇯🇵|日本|(?:^|[-_/|\\s])JP(?:[-_/|\\s]|$)|^🇸🇬|新加坡|狮城|(?:^|[-_/|\\s])SG(?:[-_/|\\s]|$)|^🇺🇸|美国|美國|(?:^|[-_/|\\s])US(?:[-_/|\\s]|$))",
+  ],
   ["^🇭🇰 香港自动$", "(?:^🇭🇰|香港|(?:^|[-_/|\\s])HK(?:[-_/|\\s]|$))"],
   ["^🇯🇵 日本自动$", "(?:^🇯🇵|日本|(?:^|[-_/|\\s])JP(?:[-_/|\\s]|$))"],
   ["^🇸🇬 狮城自动$", "(?:^🇸🇬|新加坡|狮城|(?:^|[-_/|\\s])SG(?:[-_/|\\s]|$))"],
   ["^🇺🇲 美国自动$", "(?:^🇺🇸|美国|美國|(?:^|[-_/|\\s])US(?:[-_/|\\s]|$))"],
+  [
+    "^其他地区$",
+    "(?:^🇹🇼|台湾|台灣|(?:^|[-_/|\\s])TW(?:[-_/|\\s]|$)|^🇰🇷|韩国|韓國|(?:^|[-_/|\\s])KR(?:[-_/|\\s]|$)|^🇩🇪|德国|德國|(?:^|[-_/|\\s])DE(?:[-_/|\\s]|$)|^🇬🇧|英国|英國|(?:^|[-_/|\\s])(?:UK|GB)(?:[-_/|\\s]|$))",
+  ],
 ];
 
 const outboundArgument = injectionRules
@@ -264,7 +240,11 @@ const outboundArgument = injectionRules
   )
   .join("");
 
-const operator = file.process?.find((item) => item.type === "Script Operator");
+const operator = file.process?.find(
+  (item) =>
+    item.type === "Script Operator" &&
+    item.args?.content?.includes("/sing-box/template.js"),
+);
 if (!operator) throw new Error("Sub-Store sing-box template Script Operator not found");
 operator.args.arguments.outbound = outboundArgument;
 operator.args.arguments.name = "自建组合";
@@ -279,6 +259,25 @@ const parameters = [
   .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
   .join("&");
 operator.args.content = `${scriptBase}#${parameters}`;
+
+const metadataFilterName = "过滤 sing-box 订阅状态节点";
+file.process = (file.process ?? []).filter(
+  (item) =>
+    item.customName !== metadataFilterName &&
+    item.args?.content !== metadataFilterUrl,
+);
+const operatorIndex = file.process.indexOf(operator);
+file.process.splice(operatorIndex + 1, 0, {
+  id: "20260729.2401",
+  type: "Script Operator",
+  disabled: false,
+  customName: metadataFilterName,
+  args: {
+    mode: "link",
+    content: metadataFilterUrl,
+    arguments: {},
+  },
+});
 
 const outboundTags = new Set(config.outbounds.map((outbound) => outbound.tag));
 if (outboundTags.size !== config.outbounds.length) {

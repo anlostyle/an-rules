@@ -19,7 +19,9 @@ The Sub-Store migration intentionally mirrors Surge's service-rule coverage
 without copying its full policy-group topology. Related services share compact
 policy groups, while Hong Kong, Japan, Singapore, the United States, and the
 global automatic group use sing-box URLTest directly over matching raw nodes.
-This keeps the Clash API at 19 visible groups (including `GLOBAL`) instead of
+Taiwan, South Korea, Germany, and the United Kingdom are collected in one manual
+`其他地区` selector. Subscription-status entries are excluded from all groups.
+This keeps the Clash API at 20 visible groups (including `GLOBAL`) instead of
 exposing every provider landing group.
 
 URLTest is latency-based rather than an equivalent of Surge Smart. The generated
