@@ -340,12 +340,14 @@ operator.args.arguments.name = "自建组合";
 operator.args.arguments.type = "组合订阅";
 
 const scriptBase = operator.args.content.split("#", 1)[0];
-const parameters = new URLSearchParams({
-  name: "自建组合",
-  outbound: outboundArgument,
-  type: "组合订阅",
-});
-operator.args.content = `${scriptBase}#${parameters.toString()}`;
+const parameters = [
+  ["name", "自建组合"],
+  ["outbound", outboundArgument],
+  ["type", "组合订阅"],
+]
+  .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+  .join("&");
+operator.args.content = `${scriptBase}#${parameters}`;
 
 const outboundTags = new Set(config.outbounds.map((outbound) => outbound.tag));
 if (outboundTags.size !== config.outbounds.length) {
