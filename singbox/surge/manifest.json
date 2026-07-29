@@ -1,0 +1,330 @@
+{
+  "source": "白菜灵车漂移.conf",
+  "generatedAt": "2026-07-29T14:13:40.906Z",
+  "policies": {
+    "AI": {
+      "file": "singbox/surge/ai.json",
+      "sources": [
+        "https://ruleset.skk.moe/List/non_ip/ai.conf",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Gemini/Gemini.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Bing/Bing.list"
+      ],
+      "counts": {
+        "domain": 16,
+        "domain_suffix": 45,
+        "domain_keyword": 5
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "URL-REGEX"
+      ]
+    },
+    "Telegram": {
+      "file": "singbox/surge/telegram.json",
+      "sources": [
+        "https://ruleset.skk.moe/List/non_ip/telegram.conf",
+        "https://ruleset.skk.moe/List/ip/telegram.conf",
+        "https://ruleset.skk.moe/List/ip/telegram_asn.conf"
+      ],
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 14,
+        "ip_cidr": 15
+      },
+      "ipAsns": [
+        "211157",
+        "44907",
+        "59930",
+        "62014",
+        "62041"
+      ],
+      "skippedTypes": []
+    },
+    "Twitter": {
+      "file": "singbox/surge/twitter.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Facebook/Facebook.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Instagram/Instagram.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Threads/Threads.list"
+      ],
+      "counts": {
+        "domain_suffix": 571,
+        "domain_keyword": 4,
+        "ip_cidr": 29
+      },
+      "ipAsns": [
+        "32934"
+      ],
+      "skippedTypes": []
+    },
+    "Netflix": {
+      "file": "singbox/surge/netflix.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list"
+      ],
+      "counts": {
+        "domain": 3,
+        "domain_suffix": 30,
+        "domain_keyword": 4,
+        "ip_cidr": 1119
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "Disney+": {
+      "file": "singbox/surge/disney.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Disney/Disney.list"
+      ],
+      "counts": {
+        "domain_suffix": 172
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "HBO": {
+      "file": "singbox/surge/hbo.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/HBO/HBO.list"
+      ],
+      "counts": {
+        "domain_suffix": 47
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "Spotify": {
+      "file": "singbox/surge/spotify.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list"
+      ],
+      "counts": {
+        "domain": 6,
+        "domain_suffix": 20,
+        "domain_keyword": 1,
+        "ip_cidr": 2
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "TikTok": {
+      "file": "singbox/surge/tiktok.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list"
+      ],
+      "counts": {
+        "domain": 4,
+        "domain_suffix": 25,
+        "domain_keyword": 2
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "国外媒体": {
+      "file": "singbox/surge/global-media.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GlobalMedia/GlobalMedia.list"
+      ],
+      "counts": {
+        "domain_suffix": 179,
+        "domain_keyword": 26,
+        "ip_cidr": 924
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "URL-REGEX",
+        "USER-AGENT"
+      ]
+    },
+    "Emby": {
+      "file": "singbox/surge/emby.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Emby/Emby.list"
+      ],
+      "counts": {
+        "domain": 3,
+        "domain_suffix": 45,
+        "domain_keyword": 3
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME"
+      ]
+    },
+    "OneDrive": {
+      "file": "singbox/surge/onedrive.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OneDrive/OneDrive.list"
+      ],
+      "counts": {
+        "domain_suffix": 13,
+        "domain_keyword": 3
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME"
+      ]
+    },
+    "Google": {
+      "file": "singbox/surge/google.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GoogleDrive/GoogleDrive.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list"
+      ],
+      "counts": {
+        "domain": 2,
+        "domain_suffix": 686,
+        "domain_keyword": 5,
+        "ip_cidr": 5
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "苹果服务": {
+      "file": "singbox/surge/apple.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple.list"
+      ],
+      "counts": {
+        "domain_keyword": 7,
+        "ip_cidr": 13
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "微软服务": {
+      "file": "singbox/surge/microsoft.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list"
+      ],
+      "counts": {
+        "domain": 1,
+        "domain_suffix": 663,
+        "domain_keyword": 4
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "Speedtest": {
+      "file": "singbox/surge/speedtest.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list"
+      ],
+      "counts": {
+        "domain_suffix": 4,
+        "domain_keyword": 1
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "USER-AGENT"
+      ]
+    },
+    "Bilibili": {
+      "file": "singbox/surge/bilibili.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list"
+      ],
+      "counts": {
+        "domain": 53,
+        "domain_suffix": 62,
+        "ip_cidr": 8
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "PROCESS-NAME",
+        "USER-AGENT"
+      ]
+    },
+    "WeChat": {
+      "file": "singbox/surge/wechat.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list"
+      ],
+      "counts": {
+        "domain": 7,
+        "domain_suffix": 22,
+        "domain_keyword": 233,
+        "ip_cidr": 67
+      },
+      "ipAsns": [
+        "132203"
+      ],
+      "skippedTypes": [
+        "USER-AGENT"
+      ]
+    },
+    "金融服务": {
+      "file": "singbox/surge/finance.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AliPay/AliPay.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/UnionPay/UnionPay.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/VISA/VISA.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Stripe/Stripe.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Binance/Binance.list",
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OKX/OKX.list"
+      ],
+      "counts": {
+        "domain_suffix": 397,
+        "domain_keyword": 2
+      },
+      "ipAsns": [],
+      "skippedTypes": [
+        "USER-AGENT"
+      ]
+    },
+    "E-Hentai": {
+      "file": "singbox/surge/ehentai.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/EHGallery/EHGallery.list"
+      ],
+      "counts": {
+        "domain_suffix": 6,
+        "ip_cidr": 1
+      },
+      "ipAsns": [],
+      "skippedTypes": []
+    },
+    "PT站点": {
+      "file": "singbox/surge/private-tracker.json",
+      "sources": [
+        "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PrivateTracker/PrivateTracker.list"
+      ],
+      "counts": {
+        "domain": 118,
+        "domain_suffix": 123,
+        "domain_keyword": 4,
+        "ip_cidr": 3
+      },
+      "ipAsns": [],
+      "skippedTypes": []
+    }
+  }
+}
