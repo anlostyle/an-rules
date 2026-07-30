@@ -26,7 +26,7 @@ const orderedInfrastructureChoices = [
   "♻️ 自动选择",
   "🐸 手动选择",
   ...countryGroups,
-  "其他地区",
+  "🌐 其他地区",
   "🎯 全球直连",
 ];
 
@@ -55,16 +55,26 @@ function urltest(tag) {
 
 const serviceGroups = [
   selector("🚀 默认代理", orderedInfrastructureChoices, "♻️ 自动选择"),
-  selector("🧠 AI", serviceChoices, "🇸🇬 狮城自动"),
-  selector("🌍 国外媒体", serviceChoices, "🚀 默认代理"),
-  selector("📲 社交媒体", serviceChoices, "🇭🇰 香港自动"),
-  selector("🎥 流媒体", serviceChoices, "🇭🇰 香港自动"),
+  selector("📺 国外媒体", serviceChoices, "🚀 默认代理"),
+  selector("✈️ Telegram", serviceChoices, "🇭🇰 香港自动"),
+  selector("🐦 Twitter", serviceChoices, "🇭🇰 香港自动"),
+  selector("🎬 Netflix", serviceChoices, "🇭🇰 香港自动"),
+  selector("🏰 Disney+", serviceChoices, "🇭🇰 香港自动"),
+  selector("🎞️ HBO", serviceChoices, "🇭🇰 香港自动"),
+  selector("🎧 Spotify", serviceChoices, "🇭🇰 香港自动"),
   selector("🎵 TikTok", serviceChoices, "🇯🇵 日本自动"),
-  selector("🎞 Emby", serviceChoices, "🇭🇰 香港自动"),
+  selector("🧠 AI", serviceChoices, "🇸🇬 狮城自动"),
+  selector("📽️ Emby", serviceChoices, "🇭🇰 香港自动"),
   selector("🍀 Google", serviceChoices, "🚀 默认代理"),
-  selector("🪟 Microsoft", serviceChoices, "🎯 全球直连"),
+  selector("🪟 微软服务", serviceChoices, "🎯 全球直连"),
+  selector("🍏 苹果服务", serviceChoices, "🎯 全球直连"),
+  selector("⚡ Speedtest", serviceChoices, "🎯 全球直连"),
   selector("🐬 OneDrive", serviceChoices, "🎯 全球直连"),
-  selector("🍏 Apple", serviceChoices, "🎯 全球直连"),
+  selector("📺 Bilibili", serviceChoices, "🎯 全球直连"),
+  selector("💬 WeChat", serviceChoices, "🎯 全球直连"),
+  selector("💰 金融服务", serviceChoices, "🎯 全球直连"),
+  selector("🔞 E-Hentai", serviceChoices, "🇯🇵 日本自动"),
+  selector("⬇️ PT站点", serviceChoices, "🎯 全球直连"),
   selector(
     "🐠 漏网之鱼",
     ["🚀 默认代理", "🎯 全球直连"],
@@ -76,7 +86,7 @@ const infrastructureOutbounds = [
   urltest("♻️ 自动选择"),
   selector("🐸 手动选择", []),
   ...countryGroups.map((tag) => urltest(tag)),
-  selector("其他地区", []),
+  selector("🌐 其他地区", []),
   { tag: "🎯 全球直连", type: "direct" },
 ];
 
@@ -113,25 +123,25 @@ function binaryRuleSet(tag, url) {
 
 const policySlugs = new Map([
   ["ai", "🧠 AI"],
-  ["telegram", "📲 社交媒体"],
-  ["twitter", "📲 社交媒体"],
-  ["netflix", "🎥 流媒体"],
-  ["disney", "🎥 流媒体"],
-  ["hbo", "🎥 流媒体"],
-  ["spotify", "🎥 流媒体"],
+  ["telegram", "✈️ Telegram"],
+  ["twitter", "🐦 Twitter"],
+  ["netflix", "🎬 Netflix"],
+  ["disney", "🏰 Disney+"],
+  ["hbo", "🎞️ HBO"],
+  ["spotify", "🎧 Spotify"],
   ["tiktok", "🎵 TikTok"],
-  ["global-media", "🌍 国外媒体"],
-  ["emby", "🎞 Emby"],
+  ["global-media", "📺 国外媒体"],
+  ["emby", "📽️ Emby"],
   ["onedrive", "🐬 OneDrive"],
   ["google", "🍀 Google"],
-  ["apple", "🍏 Apple"],
-  ["microsoft", "🪟 Microsoft"],
-  ["speedtest", "🎯 全球直连"],
-  ["bilibili", "🎯 全球直连"],
-  ["wechat", "🎯 全球直连"],
-  ["finance", "🎯 全球直连"],
-  ["ehentai", "🇯🇵 日本自动"],
-  ["private-tracker", "🎯 全球直连"],
+  ["apple", "🍏 苹果服务"],
+  ["microsoft", "🪟 微软服务"],
+  ["speedtest", "⚡ Speedtest"],
+  ["bilibili", "📺 Bilibili"],
+  ["wechat", "💬 WeChat"],
+  ["finance", "💰 金融服务"],
+  ["ehentai", "🔞 E-Hentai"],
+  ["private-tracker", "⬇️ PT站点"],
 ]);
 
 const asnPolicies = new Map([
@@ -187,7 +197,7 @@ for (const [slug, policy] of policySlugs) {
     action: "route",
     outbound: policy,
   });
-  for (const asn of asnPolicies.get(policy) ?? []) {
+  for (const asn of asnPolicies.get(slug) ?? []) {
     routeRules.push({
       rule_set: `asn-${asn}`,
       action: "route",
@@ -230,7 +240,7 @@ const injectionRules = [
   ["^🇯🇵 日本自动$", "^(?!🇯🇵 JP-GREEN｜Vless$)🇯🇵"],
   ["^🇸🇬 狮城自动$", "^🇸🇬"],
   ["^🇺🇲 美国自动$", "^(?!🇺🇸 US-BWH｜Vless$)🇺🇸"],
-  ["^其他地区$", "^(?:🇹🇼|🇰🇷|🇩🇪|🇬🇧)"],
+  ["^🌐 其他地区$", "^(?:🇹🇼|🇰🇷|🇩🇪|🇬🇧)"],
 ];
 
 const outboundArgument = injectionRules
