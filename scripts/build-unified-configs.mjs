@@ -251,7 +251,14 @@ function mappedMihomoRules() {
 }
 
 let mihomo = sourceMihomoFile.content.replace(/^global-client-fingerprint:.*\n/m, "");
-for (const key of ["geodata-mode", "geodata-loader", "geox-url", "geo-auto-update", "geo-update-interval"]) {
+for (const key of [
+  "geodata-mode",
+  "geodata-loader",
+  "geox-url",
+  "geo-auto-update",
+  "geo-update-interval",
+  "external-ui",
+]) {
   mihomo = removeYamlBlock(mihomo, key);
 }
 mihomo = replaceYamlBlock(mihomo, "proxy-groups", mihomoGroups());
