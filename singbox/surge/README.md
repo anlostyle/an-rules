@@ -15,12 +15,14 @@ to MetaCubeX ASN rule sets by the Sub-Store sing-box template. URL regex,
 User-Agent, and client process rules are recorded as unsupported because a
 router-side transparent proxy cannot reproduce those client-only matchers.
 
-The Sub-Store migration mirrors the 20 business policy groups in the active
-Surge profile, in the same display order: 国外媒体, Telegram, Twitter, Netflix,
+The Sub-Store migration mirrors the 21 business policy groups in the active
+Surge profile, in the same display order: 国外媒体, Steam, Telegram, Twitter, Netflix,
 Disney+, HBO, Spotify, TikTok, AI, Emby, Google, 微软服务, 苹果服务, Speedtest,
 OneDrive, Bilibili, WeChat, 金融服务, E-Hentai, and PT站点. Each service has its
 own sing-box selector instead of sharing a combined social-media or streaming
-group.
+group. Steam is split into a download/CDN rule set routed directly and a
+dedicated `🎮 Steam` selector for store, account, community, and other Steam
+traffic.
 
 Surge `icon-url` metadata cannot be represented by sing-box Selector outbounds
 or its Clash API, so emoji prefixes provide the visible group icons instead.
@@ -30,7 +32,7 @@ Germany, and the United Kingdom are collected in one manual `🌐 其他地区`
 selector. Subscription-status entries are excluded from all groups.
 `JP-GREEN｜Vless` and `US-BWH｜Vless` remain available in `🐸 手动选择` but are
 excluded from the global and country automatic URLTest groups.
-The Clash API exposes 31 groups in total: 20 business groups, two routing
+The Clash API exposes 32 groups in total: 21 business groups, two routing
 control groups (`🚀 默认代理` and `🐠 漏网之鱼`), eight infrastructure groups,
 and `GLOBAL`.
 

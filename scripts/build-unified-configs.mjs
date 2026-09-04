@@ -42,6 +42,65 @@ if (!sourceSingboxFile || !sourceMihomoFile) {
 }
 
 const singbox = JSON.parse(sourceSingboxFile.content);
+const steamServiceChoices = [
+  "🚀 默认代理",
+  "♻️ 自动选择",
+  "🐸 手动选择",
+  "🇭🇰 香港自动",
+  "🇯🇵 日本自动",
+  "🇸🇬 狮城自动",
+  "🇺🇲 美国自动",
+  "🌐 其他地区",
+  "🎯 全球直连",
+];
+const steamGroup = {
+  tag: "🎮 Steam",
+  type: "selector",
+  outbounds: steamServiceChoices,
+  default: "🚀 默认代理",
+};
+if (!singbox.outbounds.some((outbound) => outbound.tag === steamGroup.tag)) {
+  const mediaIndex = singbox.outbounds.findIndex(
+    (outbound) => outbound.tag === "📺 国外媒体",
+  );
+  singbox.outbounds.splice(mediaIndex + 1, 0, steamGroup);
+}
+const globalGroup = singbox.outbounds.find((outbound) => outbound.tag === "GLOBAL");
+if (globalGroup && !globalGroup.outbounds.includes(steamGroup.tag)) {
+  globalGroup.outbounds.splice(1, 0, steamGroup.tag);
+}
+if (!singbox.route.rule_set.some(({ tag }) => tag === "surge-steam")) {
+  const userRuleIndex = singbox.route.rule_set.findIndex(({ tag }) => tag === "user-hk");
+  singbox.route.rule_set.splice(
+    userRuleIndex < 0 ? singbox.route.rule_set.length : userRuleIndex,
+    0,
+    {
+      tag: "surge-steam-download",
+      type: "remote",
+      format: "source",
+      url: `${rawBase}/singbox/surge/steam-download.json`,
+      download_detour: "🎯 全球直连",
+    },
+    {
+      tag: "surge-steam",
+      type: "remote",
+      format: "source",
+      url: `${rawBase}/singbox/surge/steam.json`,
+      download_detour: "🎯 全球直连",
+    },
+  );
+}
+if (!singbox.route.rules.some((rule) => rule.rule_set === "surge-steam")) {
+  const userRuleIndex = singbox.route.rules.findIndex(
+    (rule) => rule.rule_set === "user-hk",
+  );
+  singbox.route.rules.splice(
+    userRuleIndex < 0 ? singbox.route.rules.length : userRuleIndex,
+    0,
+    { rule_set: "surge-steam-download", action: "route", outbound: "🎯 全球直连" },
+    { rule_set: "surge-steam", action: "route", outbound: "🎮 Steam" },
+  );
+}
 const canonicalGroups = singbox.outbounds.filter((outbound) =>
   ["selector", "urltest", "direct"].includes(outbound.type),
 );
@@ -372,7 +431,12 @@ function cloneFile(source, name, content, process = []) {
 }
 
 const newFiles = [
-  cloneFile(sourceSingboxFile, fileNames.singbox, sourceSingboxFile.content, sourceSingboxFile.process),
+  cloneFile(
+    sourceSingboxFile,
+    fileNames.singbox,
+    `${JSON.stringify(singbox, null, 2)}\n`,
+    sourceSingboxFile.process,
+  ),
   cloneFile(sourceMihomoFile, fileNames.mihomo, mihomo),
   cloneFile(sourceMihomoFile, fileNames.surge, surge),
 ];
@@ -392,7 +456,7 @@ if (mihomo.includes("global-client-fingerprint") || !surge.includes("🏠 回家
 
 await fs.mkdir(outputDir, { recursive: true, mode: 0o700 });
 await fs.chmod(outputDir, 0o700);
-await fs.writeFile(path.join(outputDir, "singbox.json"), `${sourceSingboxFile.content.trimEnd()}\n`, { mode: 0o600 });
+await fs.writeFile(path.join(outputDir, "singbox.json"), `${JSON.stringify(singbox, null, 2)}\n`, { mode: 0o600 });
 await fs.writeFile(path.join(outputDir, "mihomo.yaml"), mihomo, { mode: 0o600 });
 await fs.writeFile(path.join(outputDir, "surge.conf"), surge, { mode: 0o600 });
 await fs.writeFile(path.join(outputDir, "sub-store.json"), `${JSON.stringify(store, null, 2)}\n`, { mode: 0o600 });

@@ -56,6 +56,7 @@ function urltest(tag) {
 const serviceGroups = [
   selector("🚀 默认代理", orderedInfrastructureChoices, "♻️ 自动选择"),
   selector("📺 国外媒体", serviceChoices, "🚀 默认代理"),
+  selector("🎮 Steam", serviceChoices, "🚀 默认代理"),
   selector("✈️ Telegram", serviceChoices, "🇭🇰 香港自动"),
   selector("🐦 Twitter", serviceChoices, "🇭🇰 香港自动"),
   selector("🎬 Netflix", serviceChoices, "🇭🇰 香港自动"),
@@ -122,6 +123,7 @@ function binaryRuleSet(tag, url) {
 }
 
 const policySlugs = new Map([
+  ["steam", "🎮 Steam"],
   ["ai", "🧠 AI"],
   ["telegram", "✈️ Telegram"],
   ["twitter", "🐦 Twitter"],
@@ -153,6 +155,7 @@ const asnPolicies = new Map([
 const serviceRuleSets = [...policySlugs.keys()].map((slug) =>
   sourceRuleSet(`surge-${slug}`, slug),
 );
+const steamDownloadRuleSet = sourceRuleSet("surge-steam-download", "steam-download");
 const asnRuleSets = [...asnPolicies.values()]
   .flat()
   .map((asn) =>
@@ -175,6 +178,7 @@ config.route.rule_set = [
     "geosite-ads-all",
     `${metaBase}/geo/geosite/category-ads-all.srs`,
   ),
+  steamDownloadRuleSet,
   ...serviceRuleSets,
   ...asnRuleSets,
   ...personalRuleSets,
@@ -207,6 +211,8 @@ for (const [slug, policy] of policySlugs) {
 }
 
 routeRules.push(
+  { rule_set: "surge-steam-download", action: "route", outbound: "🎯 全球直连" },
+  { rule_set: "surge-steam", action: "route", outbound: "🎮 Steam" },
   { rule_set: "user-hk", action: "route", outbound: "🇭🇰 香港自动" },
   { rule_set: "user-sg", action: "route", outbound: "🇸🇬 狮城自动" },
   { rule_set: "user-us", action: "route", outbound: "🇺🇲 美国自动" },
