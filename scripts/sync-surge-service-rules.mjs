@@ -32,6 +32,12 @@ const policyFiles = new Map([
   ["PT站点", "private-tracker"],
 ]);
 
+// Entries removed from a service set because a personal user-* rule must win
+// (service sets are matched before user-* rules in the sing-box template).
+const policyExclusions = new Map([
+  ["PT站点", { domain_suffix: ["hdbits.org"] }],
+]);
+
 const fieldMap = new Map([
   ["DOMAIN", "domain"],
   ["DOMAIN-SUFFIX", "domain_suffix"],
@@ -136,6 +142,10 @@ for (const [policy, fileSlug] of policyFiles) {
 
   for (const line of inlineRules.get(policy) ?? []) {
     parseRuleLine(line, fields, skippedTypes);
+  }
+
+  for (const [key, values] of Object.entries(policyExclusions.get(policy) ?? {})) {
+    for (const value of values) fields.get(key)?.delete(value);
   }
 
   const ipAsns = [...(fields.get("ip_asn") ?? [])].sort();
