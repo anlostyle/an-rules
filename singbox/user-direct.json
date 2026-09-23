@@ -3,13 +3,11 @@
   "rules": [
     {
       "domain": [
-        "dsadata.intel.com",
-        "doh.pub"
+        "dsadata.intel.com"
       ]
     },
     {
       "domain_suffix": [
-        "speedtest.im",
         "ui.com",
         "ubnt.com",
         "greencloudvps.com",
@@ -17,11 +15,6 @@
         "sonos.com",
         "synology.com",
         "termius.com"
-      ]
-    },
-    {
-      "domain_keyword": [
-        "oracle.com"
       ]
     },
     {
