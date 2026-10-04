@@ -1,0 +1,81 @@
+# my-rules.list —— 你唯一需要手改的个人规则文件（见 scripts/build_user_rules.py 的说明）
+# 每行：类型,值,出口   # 备注        类型 DOMAIN / DOMAIN-SUFFIX / DOMAIN-KEYWORD / DOMAIN-REGEX / IP-CIDR；出口 HK / SG / US / JP / DIRECT
+# 改完提交即可：本仓库装了 pre-commit 钩子，会自动重新生成 singbox/user-*.json 并一起提交。
+
+# ===== 刮削 / 片源（Immortal、KKB 用到的站点） =====
+DOMAIN-SUFFIX,dmm.co.jp,JP
+DOMAIN-SUFFIX,mgstage.com,JP
+DOMAIN-SUFFIX,jav321.com,JP
+DOMAIN-SUFFIX,fc2hub.com,JP
+DOMAIN-SUFFIX,fc2ppvdb.com,JP
+DOMAIN-SUFFIX,freejavbt.com,JP
+DOMAIN-SUFFIX,prestige-av.com,JP
+DOMAIN-SUFFIX,amazon.co.jp,JP
+DOMAIN-KEYWORD,sukebei,JP
+DOMAIN-SUFFIX,paycalling.com,JP
+DOMAIN-SUFFIX,mdpjzip.xyz,JP
+DOMAIN-SUFFIX,hscangku.net,JP
+DOMAIN-SUFFIX,cableav.tv,JP
+DOMAIN-SUFFIX,love6.tv,JP
+DOMAIN-SUFFIX,yesjav.info,JP
+DOMAIN-KEYWORD,javdb,HK
+DOMAIN-SUFFIX,theporndb.net,US
+
+# ===== 刮削 / 片源 —— 新增（2026-10-04，KKB / Immortal 实际用到的域名，及从别人规则里补的）=====
+# 出口先照别人的规则：javdb 一族走香港，其余走日本。哪个站禁日本节点，只需把那一行的 JP 改成 HK（或别的）。
+DOMAIN-SUFFIX,jdbstatic.com,HK   # javdb 图床（域名里没有 javdb，关键字规则匹配不到；今天封面被 Cloudflare 拦就是它）
+DOMAIN-SUFFIX,btyjscl.com,HK     # javdb API（同上）
+DOMAIN-SUFFIX,javbus.com,JP
+DOMAIN-KEYWORD,javbus,JP         # javbus 的镜像域名
+DOMAIN-SUFFIX,avbase.net,JP
+DOMAIN-SUFFIX,airav.io,JP
+DOMAIN-SUFFIX,7mmtv.sx,JP
+DOMAIN-SUFFIX,madou.club,JP
+DOMAIN-SUFFIX,madouqu.com,JP
+DOMAIN-SUFFIX,javlibrary.com,JP
+DOMAIN-SUFFIX,caribbeancom.com,JP   # KKB 的 carib 适配器
+DOMAIN-SUFFIX,fc2cmadb.com,JP       # KKB 的 fc2cmadb 适配器
+DOMAIN-SUFFIX,javten.com,JP         # KKB 的 fc2_hub 适配器
+DOMAIN-SUFFIX,fc2.com,JP            # FC2 的图片在 contents-thumbnail2.fc2.com 之类的子域名上
+DOMAIN-SUFFIX,dmm.com,JP            # DMM 的另一个图片域名 awsimgsrc.dmm.com
+# 刻意没启用的两条（对方有、我们没加）：
+# DOMAIN-KEYWORD,amazon,JP         # 太宽：会把 AWS、amazon.com 都拽到日本；已有 amazon.co.jp 够用
+# DOMAIN-KEYWORD,sehuatang,JP      # 色花堂现在爬得通，改出口有风险；想让它走日本再打开
+
+# ===== PT 站点 =====
+DOMAIN-SUFFIX,hdbits.org,US
+DOMAIN-SUFFIX,pterclub.net,HK
+
+# ===== 金融 / 支付 / 运营商 =====
+DOMAIN-SUFFIX,binance.com,HK
+DOMAIN-SUFFIX,paypal.com,US
+DOMAIN-KEYWORD,redotpay,SG
+DOMAIN-KEYWORD,redpocket,SG
+DOMAIN-SUFFIX,t-mobile.com,US
+IP-CIDR,208.54.0.0/16,US   # T-Mobile 的地址段
+
+# ===== 韩国购物 =====
+DOMAIN-SUFFIX,about.co.kr,US
+DOMAIN-SUFFIX,auction.co.kr,US
+DOMAIN-SUFFIX,ebay.co.kr,US
+DOMAIN-SUFFIX,ebaykorea.com,US
+DOMAIN-SUFFIX,esmplus.com,US
+DOMAIN-SUFFIX,g9.co.kr,US
+DOMAIN-SUFFIX,gmarket.co.kr,US
+
+# ===== 自家服务 / 自己的 VPS（直连；wall.andp.cc 是比 andp.cc 更具体的特例，走狮城） =====
+DOMAIN,wall.andp.cc,SG   # 特例：比下面的 andp.cc 更具体，按顺序 SG 先生效
+DOMAIN-SUFFIX,andp.cc,DIRECT
+DOMAIN-SUFFIX,dmit.io,US   # VPS 厂商
+DOMAIN-SUFFIX,greencloudvps.com,DIRECT
+IP-CIDR,110.238.105.108/32,DIRECT   # 自己的 VPS
+IP-CIDR,110.238.110.28/32,DIRECT   # 自己的 VPS
+IP-CIDR,111.119.200.187/32,DIRECT   # 自己的 VPS
+
+# ===== 设备 / 厂商服务（直连） =====
+DOMAIN,dsadata.intel.com,DIRECT
+DOMAIN-SUFFIX,ui.com,DIRECT
+DOMAIN-SUFFIX,ubnt.com,DIRECT
+DOMAIN-SUFFIX,sonos.com,DIRECT
+DOMAIN-SUFFIX,synology.com,DIRECT
+DOMAIN-SUFFIX,termius.com,DIRECT

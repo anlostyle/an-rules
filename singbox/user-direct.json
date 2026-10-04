@@ -4,14 +4,12 @@
     {
       "domain": [
         "dsadata.intel.com"
-      ]
-    },
-    {
+      ],
       "domain_suffix": [
+        "andp.cc",
+        "greencloudvps.com",
         "ui.com",
         "ubnt.com",
-        "greencloudvps.com",
-        "andp.cc",
         "sonos.com",
         "synology.com",
         "termius.com"

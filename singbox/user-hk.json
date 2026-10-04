@@ -3,8 +3,10 @@
   "rules": [
     {
       "domain_suffix": [
-        "binance.com",
-        "pterclub.net"
+        "jdbstatic.com",
+        "btyjscl.com",
+        "pterclub.net",
+        "binance.com"
       ],
       "domain_keyword": [
         "javdb"
