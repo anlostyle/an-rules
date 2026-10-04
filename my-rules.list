@@ -22,20 +22,22 @@ DOMAIN-KEYWORD,javdb,HK
 DOMAIN-SUFFIX,theporndb.net,US
 
 # ===== 刮削 / 片源 —— 新增（2026-10-04，KKB / Immortal 实际用到的域名，及从别人规则里补的）=====
-# 出口先照别人的规则：javdb 一族走香港，其余走日本。哪个站禁日本节点，只需把那一行的 JP 改成 HK（或别的）。
+# 出口依据（2026-10-04 实测）：日本出口 191.222.214.55 被 Cloudflare 拦，对 javbus 图片 / avbase / javten / airav / javlibrary 都是 403，这几个走香港；
+# 日本出口下正常的（7mmtv / madou / madouqu / freejavbt / jav321 / sukebei / mgstage / caribbeancom / dmm / fc2 / fc2cmadb）保持日本。
+# 哪个站不能走某个出口，只需改那一行的出口。
 DOMAIN-SUFFIX,jdbstatic.com,HK   # javdb 图床（域名里没有 javdb，关键字规则匹配不到；今天封面被 Cloudflare 拦就是它）
 DOMAIN-SUFFIX,btyjscl.com,HK     # javdb API（同上）
-DOMAIN-SUFFIX,javbus.com,JP
-DOMAIN-KEYWORD,javbus,JP         # javbus 的镜像域名
-DOMAIN-SUFFIX,avbase.net,JP
-DOMAIN-SUFFIX,airav.io,JP
+DOMAIN-SUFFIX,javbus.com,HK      # 日本出口的 IP 被 Cloudflare 拦（图片 403），走香港
+DOMAIN-KEYWORD,javbus,HK         # javbus 的镜像域名
+DOMAIN-SUFFIX,avbase.net,HK       # 同上：日本出口 403
+DOMAIN-SUFFIX,airav.io,HK         # 同上：日本出口 403
 DOMAIN-SUFFIX,7mmtv.sx,JP
 DOMAIN-SUFFIX,madou.club,JP
 DOMAIN-SUFFIX,madouqu.com,JP
-DOMAIN-SUFFIX,javlibrary.com,JP
+DOMAIN-SUFFIX,javlibrary.com,HK   # 同上：日本出口 403
 DOMAIN-SUFFIX,caribbeancom.com,JP   # KKB 的 carib 适配器
 DOMAIN-SUFFIX,fc2cmadb.com,JP       # KKB 的 fc2cmadb 适配器
-DOMAIN-SUFFIX,javten.com,JP         # KKB 的 fc2_hub 适配器
+DOMAIN-SUFFIX,javten.com,HK         # KKB 的 fc2_hub 适配器；日本出口 403
 DOMAIN-SUFFIX,fc2.com,JP            # FC2 的图片在 contents-thumbnail2.fc2.com 之类的子域名上
 DOMAIN-SUFFIX,dmm.com,JP            # DMM 的另一个图片域名 awsimgsrc.dmm.com
 # 刻意没启用的两条（对方有、我们没加）：
