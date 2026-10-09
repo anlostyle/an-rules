@@ -1,12 +1,11 @@
 DOMAIN,dsadata.intel.com
-DOMAIN,doh.pub
-DOMAIN-SUFFIX,speedtest.im
+DOMAIN-SUFFIX,andp.cc
+DOMAIN-SUFFIX,greencloudvps.com
 DOMAIN-SUFFIX,ui.com
 DOMAIN-SUFFIX,ubnt.com
-DOMAIN-SUFFIX,greencloudvps.com
-DOMAIN-SUFFIX,andp.cc
 DOMAIN-SUFFIX,sonos.com
 DOMAIN-SUFFIX,synology.com
 DOMAIN-SUFFIX,termius.com
-DOMAIN-KEYWORD,oracle.com
 IP-CIDR,110.238.105.108/32,no-resolve
+IP-CIDR,110.238.110.28/32,no-resolve
+IP-CIDR,111.119.200.187/32,no-resolve
