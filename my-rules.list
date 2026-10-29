@@ -73,6 +73,7 @@ DOMAIN-SUFFIX,greencloudvps.com,DIRECT
 IP-CIDR,110.238.105.108/32,DIRECT   # 自己的 VPS
 IP-CIDR,110.238.110.28/32,DIRECT   # 自己的 VPS
 IP-CIDR,111.119.200.187/32,DIRECT   # 自己的 VPS
+IP-CIDR,104.224.156.140/32,DIRECT   # 自己的 VPS（us-mega，2026-10-29 换新 IP；旧 144.34.237.193 已作废）
 
 # ===== 设备 / 厂商服务（直连） =====
 DOMAIN,dsadata.intel.com,DIRECT
