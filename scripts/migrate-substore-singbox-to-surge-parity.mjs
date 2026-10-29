@@ -237,13 +237,13 @@ if (config.experimental?.clash_api?.external_ui_download_detour) {
 
 const majorRegionNodes = "^(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)";
 const automaticMajorRegionNodes =
-  "^(?!(?:🇯🇵 JP-GREEN｜Vless|🇺🇸 US-BWH)$)(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)";
+  "^(?!(?:🇯🇵 JP-GREEN|🇺🇸 US-BWH)$)(?:🇭🇰|🇯🇵|🇸🇬|🇺🇸)";
 
 const injectionRules = [
   ["^♻️ 自动选择$", automaticMajorRegionNodes],
   ["^🐸 手动选择$", majorRegionNodes],
   ["^🇭🇰 香港自动$", "^🇭🇰"],
-  ["^🇯🇵 日本自动$", "^(?!🇯🇵 JP-GREEN｜Vless$)🇯🇵"],
+  ["^🇯🇵 日本自动$", "^(?!🇯🇵 JP-GREEN$)🇯🇵"],
   ["^🇸🇬 狮城自动$", "^🇸🇬"],
   ["^🇺🇲 美国自动$", "^(?!🇺🇸 US-BWH$)🇺🇸"],
   ["^🌐 其他地区$", "^(?:🇹🇼|🇰🇷|🇩🇪|🇬🇧)"],
