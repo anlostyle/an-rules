@@ -30,7 +30,7 @@ Hong Kong, Japan, Singapore, the United States, and the global automatic group
 use sing-box URLTest directly over matching raw nodes. Taiwan, South Korea,
 Germany, and the United Kingdom are collected in one manual `🌐 其他地区`
 selector. Subscription-status entries are excluded from all groups.
-`JP-GREEN｜Vless` and `US-BWH｜Vless` remain available in `🐸 手动选择` but are
+`JP-GREEN｜Vless` and `US-BWH` remain available in `🐸 手动选择` but are
 excluded from the global and country automatic URLTest groups.
 The Clash API exposes 32 groups in total: 21 business groups, two routing
 control groups (`🚀 默认代理` and `🐠 漏网之鱼`), eight infrastructure groups,
